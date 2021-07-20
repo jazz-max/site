@@ -5,6 +5,7 @@ namespace app\models;
 
 use Exception;
 use linslin\yii2\curl;
+use app\models\JsonrpcRequest;
 
 
 class BalanceHelper
