@@ -16,7 +16,7 @@ class BalanceDataProvider extends BaseDataProvider
 
 	function history (): array
 	{
-		$history = [];
+		$history =  array();
 		$rows    = BalanceHelper::getHistory ( $this->userId, $this->limit );
 		foreach ($rows as $row)
 		{
@@ -34,7 +34,14 @@ class BalanceDataProvider extends BaseDataProvider
 	{
 		$row = BalanceHelper::getBalance ( $this->userId );
 
-		return [(new BalanceHistory())->fill ( $row )];
+		$balanceHistory = new BalanceHistory();
+		$balanceHistory->user_id = $this->userId;
+		$balanceHistory->created_at = "Не найдено";
+		if (count($row)>0)
+		{
+			$balanceHistory->fill ( $row );
+		}
+		return [$balanceHistory];
 	}
 
 	/**
